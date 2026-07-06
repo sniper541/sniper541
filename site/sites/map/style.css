@@ -1,0 +1,262 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    font-size: 16px;
+}
+
+#map {
+    height: 100vh;
+    width: 100vw;
+    filter: brightness(0.92);
+    border-radius: 1.2rem;
+    box-shadow: 0 8px 32px rgba(26, 33, 62, 0.25);
+    transition: filter 0.3s, box-shadow 0.3s;
+}
+
+#logo {
+    animation: fadeIn 1s ease-in-out;
+    color: #bb86fc;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 2.2rem;
+    font-weight: 700;
+    border-radius: 1rem;
+    background: rgba(34, 34, 68, 0.7);
+    padding: 0.5em 1.2em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    margin-top: 1.2rem;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#controls {
+    position: absolute;
+    top: 2.5vw;
+    left: 2.5vw;
+    z-index: 1000;
+    background: linear-gradient(135deg, #2a2a40 60%, #23234a 100%);
+    padding: 1.2em 1.5em;
+    border-radius: 1.2em;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    transition: box-shadow 0.3s, background 0.3s;
+    font-size: 1.1rem;
+    min-width: 220px;
+    max-width: 95vw;
+    animation: fadeIn 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+#controls:hover, #controls:focus-within {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #34345a 60%, #23234a 100%);
+}
+
+#toggle-edit {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 2.5em;
+    height: 1.2em;
+    margin-right: 0.5em;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #444;
+    transition: background 0.3s;
+    border-radius: 1.2em;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1em;
+    width: 1em;
+    left: 0.15em;
+    bottom: 0.1em;
+    background-color: #bb86fc;
+    transition: 0.3s;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+input:checked + .slider {
+    background-color: #6200ea;
+}
+
+input:checked + .slider:before {
+    transform: translateX(1.2em);
+    background-color: #fff;
+}
+
+#search {
+    padding: 0.7em 1em;
+    border-radius: 0.7em;
+    border: 1.5px solid #555;
+    background: linear-gradient(135deg, #3a3a50 60%, #23234a 100%);
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#search::placeholder {
+    color: #bbb;
+    opacity: 1;
+    font-size: 1em;
+}
+
+#search:focus {
+    border-color: #bb86fc;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(187,134,252,0.15);
+}
+
+#toggle-edit span {
+    font-weight: 500;
+    color: #ddd;
+    font-size: 1em;
+    letter-spacing: 0.01em;
+    transition: color 0.3s;
+}
+
+#toggle-edit span:hover {
+    color: #bb86fc;
+    text-shadow: 0 1px 4px rgba(187,134,252,0.15);
+}
+
+/* Кнопки (если появятся) */
+.button, button, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+    background: linear-gradient(135deg, #1e90ff 60%, #bb86fc 100%);
+    color: #fff;
+    border: none;
+    border-radius: 0.7em;
+    padding: 0.7em 1.2em;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(30,144,255,0.10);
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+    outline: none;
+}
+.button:hover, button:hover, .leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+    background: linear-gradient(135deg, #bb86fc 60%, #1e90ff 100%);
+    box-shadow: 0 4px 16px rgba(30,144,255,0.18);
+    transform: translateY(-2px) scale(1.04);
+}
+
+/* Адаптивная типографика */
+html {
+    font-size: 16px;
+}
+@media (max-width: 1200px) {
+    html { font-size: 15px; }
+}
+@media (max-width: 900px) {
+    html { font-size: 14px; }
+}
+@media (max-width: 700px) {
+    html { font-size: 13px; }
+    #controls {
+        flex-direction: column;
+        align-items: stretch;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 96vw;
+        max-width: 340px;
+        min-width: unset;
+        padding: 0.5em 0.3em;
+        gap: 0.5em;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    #search {
+        width: 95%;
+        max-width: 300px;
+        min-width: 0;
+        font-size: 1em;
+        padding: 0.7em 0.5em;
+        box-sizing: border-box;
+    }
+    #logo {
+        font-size: 1.2rem !important;
+        padding: 0.3em 0.5em;
+        margin-top: 0.5em;
+    }
+    .switch {
+        width: 2em;
+        height: 1em;
+        margin-right: 0.3em;
+    }
+    .slider:before {
+        height: 0.8em;
+        width: 0.8em;
+        left: 0.1em;
+        bottom: 0.1em;
+    }
+    input:checked + .slider:before {
+        transform: translateX(1em);
+    }
+    #toggle-edit span {
+        font-size: 0.95em;
+    }
+    .leaflet-control-container .leaflet-top.leaflet-left {
+        top: 200px !important;
+        left: 10px !important;
+    }
+}
+@media (max-width: 400px) {
+    html { font-size: 12px; }
+    #controls {
+        width: 98vw;
+        padding: 0.4em 0.2em;
+        font-size: 0.95em;
+    }
+    #logo {
+        font-size: 1em !important;
+        padding: 0.1em 0.2em;
+    }
+}
+
+/* Favicon */
+link[rel="icon"] {
+    width: 32px;
+    height: 32px;
+}
+
+/* --- Фикс для отступа zoom-кнопок Leaflet --- */
+.leaflet-control-container .leaflet-top.leaflet-left {
+    top: 170px !important;
+    left: 20px !important;
+}

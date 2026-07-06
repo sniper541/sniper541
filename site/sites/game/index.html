@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Список пройденных игр в современном стиле лофт"/>
+    <meta name="keywords" content="игры, лофт, список игр, статистика"/>
+    <meta name="author" content="Ваш сайт игр"/>
+    <title>Игры</title>
+    <link href="/sites/game/styles.css" rel="stylesheet" type="text/css"/>
+    <!-- Подключение шрифта Roboto для современного лофт-стиля -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <!-- Подключение Font Awesome для иконки кнопки "Назад" -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body class="dark-theme">
+    <!-- Блок с алфавитными ссылками -->
+    <div id="alphabetLinks" class="loft-section">
+        <!-- Ссылки генерируются динамически -->
+    </div>
+
+    <!-- Кнопка "Назад" (изначально скрыта) -->
+    <button id="backButton" style="display: none;" class="loft-button">
+        <i class="fas fa-arrow-left"></i> Назад
+    </button>
+
+    <!-- Таблица статистики по годам -->
+    <table id="gameTable" class="loft-table">
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Количество игр</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Здесь будет отображаться статистика -->
+        </tbody>
+    </table>
+
+    <!-- Счётчик общего количества игр -->
+    <p class="loft-counter">Всего игр: <span id="totalGameCount">0</span></p>
+
+    <h1 class="loft-title">Список пройденных игр</h1>
+
+    <!-- Контейнер для игр -->
+    <div id="gameContainer" class="loft-grid"></div>
+
+    <script>
+        let currentFilter = null;
+
+        async function loadGames() {
+            try {
+                console.log("Загрузка данных из games.json...");
+                const response = await fetch('games.json');
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки games.json: ${response.status}`);
+                }
+                const text = await response.text();
+                const data = JSON.parse(text);
+
+                const alphabetLinks = document.getElementById('alphabetLinks');
+                const gameContainer = document.getElementById('gameContainer');
+                const gameTable = document.getElementById('gameTable');
+                const totalGameCount = document.getElementById('totalGameCount');
+                const backButton = document.getElementById('backButton');
+
+                // Очищаем контейнер и таблицы перед добавлением
+                gameContainer.innerHTML = '';
+                gameTable.innerHTML = '<thead><tr><th>Год</th><th>Количество игр</th></tr></thead><tbody></tbody>';
+                alphabetLinks.innerHTML = '';
+
+                // Генерируем алфавитные ссылки в стиле кнопок
+                for (let letter of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = letter;
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        filterGamesByLetter(letter);
+                    });
+                    link.className = 'button';
+                    alphabetLinks.appendChild(link);
+                    alphabetLinks.appendChild(document.createTextNode(' '));
+                }
+
+                // Отображаем все игры по номеру (как в оригинале, без сортировки по алфавиту)
+                displayGames(data.games);
+
+                // Заполняем таблицу статистики по годам
+                if (data.statistics && data.statistics.years) {
+                    Object.entries(data.statistics.years).sort((a, b) => a[0] - b[0]).forEach(([year, count]) => {
+                        const row = document.createElement('tr');
+                        const yearCell = document.createElement('td');
+                        yearCell.textContent = year;
+                        const countCell = document.createElement('td');
+                        countCell.textContent = count;
+                        row.appendChild(yearCell);
+                        row.appendChild(countCell);
+                        gameTable.querySelector('tbody').appendChild(row);
+                    });
+                }
+
+                // Обновляем общее количество
+                totalGameCount.textContent = data.total_count || 0;
+            } catch (error) {
+                console.error("Ошибка в loadGames:", error);
+            }
+        }
+
+        function displayGames(games) {
+            const gameContainer = document.getElementById('gameContainer');
+            const backButton = document.getElementById('backButton');
+            gameContainer.innerHTML = '';
+
+            console.log(`Отображаем игры. Фильтр: ${currentFilter || 'все'}`);
+            backButton.style.display = currentFilter ? 'block' : 'none';
+
+            // Сортируем игры по номеру (как в оригинале) на главной странице
+            games.sort((a, b) => a.number - b.number).forEach(game => {
+                const gameDiv = document.createElement('div');
+                gameDiv.className = 'loft-card';
+
+                const img = document.createElement('img');
+                img.src = game.image_url;
+                img.alt = 'Изображение из игры';
+                img.className = 'loft-card-image';
+
+                const nameP = document.createElement('p');
+                nameP.textContent = `Название игры: ${game.name}`;
+                nameP.className = 'loft-card-text';
+
+                const dateP = document.createElement('p');
+                dateP.textContent = `Дата прохождения: ${game.date}`;
+                dateP.className = 'loft-card-text';
+
+                const numberP = document.createElement('p');
+                numberP.textContent = `Номер: ${game.number}`;
+                numberP.className = 'loft-card-text';
+
+                gameDiv.appendChild(img);
+                gameDiv.appendChild(nameP);
+                gameDiv.appendChild(dateP);
+                gameDiv.appendChild(numberP);
+
+                gameContainer.appendChild(gameDiv);
+            });
+
+            // Настраиваем кнопку "Назад"
+            backButton.onclick = () => {
+                console.log("Нажата кнопка 'Назад', возвращаемся к полной странице...");
+                currentFilter = null;
+                loadGames(); // Возвращаем все игры
+            };
+        }
+
+        function filterGamesByLetter(letter) {
+            console.log(`Фильтрация игр по букве: ${letter}`);
+            fetch('games.json')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredGames = data.games.filter(game =>
+                        game.name.toUpperCase().startsWith(letter)
+                    );
+                    currentFilter = letter;
+                    // Сортируем отфильтрованные игры по алфавиту
+                    displayGames(filteredGames.sort((a, b) => a.name.localeCompare(b.name)));
+                })
+                .catch(error => console.error("Ошибка фильтрации:", error));
+        }
+
+        window.onload = loadGames;
+    </script>
+</body>
+</html>

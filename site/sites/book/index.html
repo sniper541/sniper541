@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta name="description" content="Список прочитанных книг в современном стиле лофт"/>
+    <meta name="keywords" content="книги, лофт, список книг, статистика"/>
+    <meta name="author" content="Ваш сайт книг"/>
+    <title>Книги</title>
+    <link href="/sites/book/styles.css" rel="stylesheet" type="text/css"/>
+    <!-- Подключение шрифта Roboto для современного лофт-стиля -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <!-- Подключение Font Awesome для иконки кнопки "Назад" -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+</head>
+<body class="dark-theme">
+    <!-- Блок с русским алфавитом -->
+    <div id="alphabetLinks" class="loft-section">
+        <!-- Ссылки генерируются динамически -->
+    </div>
+
+    <!-- Кнопка "Назад" (изначально скрыта) -->
+    <button id="backButton" style="display: none;" class="loft-button">
+        <i class="fas fa-arrow-left"></i> Назад
+    </button>
+
+    <!-- Таблица статистики по годам -->
+    <table id="bookTable" class="loft-table">
+        <thead>
+            <tr>
+                <th>Год</th>
+                <th>Количество книг</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Здесь будет отображаться статистика -->
+        </tbody>
+    </table>
+
+    <!-- Счётчик общего количества книг -->
+    <p class="loft-counter">Всего книг: <span id="totalBookCount">0</span></p>
+
+    <h1 class="loft-title">Список прочитанных книг</h1>
+
+    <!-- Контейнер для книг -->
+    <div id="bookContainer" class="loft-grid"></div>
+
+    <script>
+        let currentFilter = null;
+
+        async function loadBooks() {
+            try {
+                console.log("Загрузка данных из books.json...");
+                const response = await fetch('books.json');
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки books.json: ${response.status}`);
+                }
+                const text = await response.text();
+                const data = JSON.parse(text);
+
+                const alphabetLinks = document.getElementById('alphabetLinks');
+                const bookContainer = document.getElementById('bookContainer');
+                const bookTable = document.getElementById('bookTable');
+                const totalBookCount = document.getElementById('totalBookCount');
+                const backButton = document.getElementById('backButton');
+
+                // Очищаем контейнер и таблицы перед добавлением
+                bookContainer.innerHTML = '';
+                bookTable.innerHTML = '<thead><tr><th>Год</th><th>Количество книг</th></tr></thead><tbody></tbody>';
+                alphabetLinks.innerHTML = '';
+
+                // Русский алфавит
+                const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+                for (let letter of russianAlphabet) {
+                    const link = document.createElement('a');
+                    link.href = '#';
+                    link.textContent = letter;
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        filterBooksByLetter(letter);
+                    });
+                    link.className = 'button';
+                    alphabetLinks.appendChild(link);
+                    alphabetLinks.appendChild(document.createTextNode(' '));
+                }
+
+                // Отображаем все книги по номеру (как в оригинале, без сортировки по алфавиту)
+                displayBooks(data.books);
+
+                // Заполняем таблицу статистики по годам
+                if (data.statistics && data.statistics.years) {
+                    Object.entries(data.statistics.years).sort((a, b) => a[0] - b[0]).forEach(([year, count]) => {
+                        const row = document.createElement('tr');
+                        const yearCell = document.createElement('td');
+                        yearCell.textContent = year;
+                        const countCell = document.createElement('td');
+                        countCell.textContent = count;
+                        row.appendChild(yearCell);
+                        row.appendChild(countCell);
+                        bookTable.querySelector('tbody').appendChild(row);
+                    });
+                }
+
+                // Обновляем общее количество
+                totalBookCount.textContent = data.total_count || 0;
+            } catch (error) {
+                console.error("Ошибка в loadBooks:", error);
+            }
+        }
+
+        function displayBooks(books) {
+            const bookContainer = document.getElementById('bookContainer');
+            const backButton = document.getElementById('backButton');
+            bookContainer.innerHTML = '';
+
+            console.log(`Отображаем книги. Фильтр: ${currentFilter || 'все'}`);
+            backButton.style.display = currentFilter ? 'block' : 'none';
+
+            // Сортируем книги по номеру (как в оригинале) на главной странице
+            books.sort((a, b) => a.number - b.number).forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'loft-card';
+
+                const img = document.createElement('img');
+                img.src = book.image_url;
+                img.alt = 'Обложка книги';
+                img.className = 'loft-card-image';
+
+                const titleP = document.createElement('p');
+                titleP.textContent = `Название: ${book.title}`;
+                titleP.className = 'loft-card-text';
+
+                const authorP = document.createElement('p');
+                authorP.textContent = `Автор: ${book.author}`;
+                authorP.className = 'loft-card-text';
+
+                const yearP = document.createElement('p');
+                yearP.textContent = `Год прочтения: ${book.year}`;
+                yearP.className = 'loft-card-text';
+
+                bookDiv.appendChild(img);
+                bookDiv.appendChild(titleP);
+                bookDiv.appendChild(authorP);
+                bookDiv.appendChild(yearP);
+
+                bookContainer.appendChild(bookDiv);
+            });
+
+            // Настраиваем кнопку "Назад"
+            backButton.onclick = () => {
+                console.log("Нажата кнопка 'Назад', возвращаемся к полной странице...");
+                currentFilter = null;
+                loadBooks(); // Возвращаем все книги
+            };
+        }
+
+        function filterBooksByLetter(letter) {
+            console.log(`Фильтрация книг по букве: ${letter}`);
+            fetch('books.json')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredBooks = data.books.filter(book =>
+                        book.title.toUpperCase().startsWith(letter)
+                    );
+                    currentFilter = letter;
+                    // Сортируем отфильтрованные книги по алфавиту
+                    displayBooks(filteredBooks.sort((a, b) => a.title.localeCompare(b.title)));
+                })
+                .catch(error => console.error("Ошибка фильтрации:", error));
+        }
+
+        window.onload = loadBooks;
+    </script>
+</body>
+</html>
