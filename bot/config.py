@@ -23,5 +23,5 @@ TOKEN = os.getenv("BOT_TOKEN")
 if not TOKEN:
     raise RuntimeError("BOT_TOKEN is not set. Create bot/.env from bot/.env.example.")
 
-GAME_JSON = os.getenv("GAME_JSON", "/var/www/sniper541.ru/html/sites/game/games.json")
-BOOK_JSON = os.getenv("BOOK_JSON", "/var/www/sniper541.ru/html/sites/book/books.json")
+GAME_JSON = os.getenv("GAME_JSON", "/opt/project/sniper541/site/sites/game/games.json")
+BOOK_JSON = os.getenv("BOOK_JSON", "/opt/project/sniper541/site/sites/book/books.json")

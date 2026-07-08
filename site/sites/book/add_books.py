@@ -6,7 +6,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 # Абсолютный путь к файлу
-JSON_FILE_PATH = "/var/www/sniper541.ru/html/sites/book/books.json"
+JSON_FILE_PATH = "/opt/project/sniper541/site/sites/book/books.json"
 
 def load_json(file_path=JSON_FILE_PATH):
     try:

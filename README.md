@@ -25,7 +25,7 @@ resume, and map pages.
 The production nginx config serves the site from:
 
 ```text
-/var/www/sniper541.ru/html
+/opt/project/sniper541/site
 ```
 
 When this repository is used as the source of truth, that path can be symlinked
@@ -60,8 +60,8 @@ Required variables:
 
 ```env
 BOT_TOKEN=
-GAME_JSON=/var/www/sniper541.ru/html/sites/game/games.json
-BOOK_JSON=/var/www/sniper541.ru/html/sites/book/books.json
+GAME_JSON=/opt/project/sniper541/site/sites/game/games.json
+BOOK_JSON=/opt/project/sniper541/site/sites/book/books.json
 ```
 
 Run the bot:
@@ -111,7 +111,7 @@ __pycache__/
 Recommended production layout:
 
 ```text
-project/sniper541/site  -> /var/www/sniper541.ru/html
+project/sniper541/site  -> /opt/project/sniper541/site
 project/sniper541/bot   -> /root/tgbot/mylife
 project/sniper541/nginx/sniper541.ru -> /etc/nginx/sites-available/sniper541.ru
 ```

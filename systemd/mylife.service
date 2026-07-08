@@ -1,0 +1,14 @@
+[Unit]
+Description=MyLife Telegram Bot
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/project/sniper541/bot
+ExecStart=/usr/bin/python3 /opt/project/sniper541/bot/bot.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
