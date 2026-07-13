@@ -1,120 +1,254 @@
 ﻿# sniper541
 
-Personal website and Telegram helper bot for managing content on
-[sniper541.ru](https://sniper541.ru).
+Personal website and Telegram bot for managing content on **sniper541.ru**.
 
-![Home page](docs/screenshots/home.png)
+The repository contains everything required for the project except secrets
+(Telegram token, SSL certificates, etc.).
 
-## Project Structure
+---
 
-```text
-.
-├── site/                 # Website files served by nginx
-├── bot/                  # Telegram bot for updating books and games
-├── nginx/                # nginx virtual host config
-├── docs/screenshots/     # README assets
-├── .env.example          # Example environment variables
+# Project structure
+
+```
+sniper541/
+
+├── site/                 # Website
+├── bot/                  # Telegram bot
+├── nginx/                # nginx configuration
+├── systemd/              # systemd services
+├── scripts/              # install / update / uninstall
+├── docs/
+├── README.md
 └── .gitignore
 ```
 
-## Website
+---
 
-The website is a small personal hub with separate sections for games, books,
-resume, and map pages.
+# Architecture
 
-The production nginx config serves the site from:
+The project lives entirely inside:
 
-```text
-/opt/project/sniper541/site
+```
+/opt/project/sniper541
 ```
 
-When this repository is used as the source of truth, that path can be symlinked
-to:
+Nothing inside the application depends on `/var/www`.
 
-```text
-project/sniper541/site
+The project itself is the source of truth.
+
+Server directories (`/etc/nginx`, `/etc/systemd`, etc.) only contain symbolic
+links to files stored inside the project.
+
+---
+
+# Requirements
+
+Ubuntu 22.04+
+
+Installed:
+
+- nginx
+- php8.1-fpm
+- python3
+- certbot (optional)
+- git
+
+---
+
+# Installation
+
+Clone repository
+
+```bash
+git clone <repository>
+cd /opt/project/sniper541
 ```
 
-## Telegram Bot
-
-The bot updates JSON data files used by the book and game sections.
-
-Main files:
-
-```text
-bot/bot.py
-bot/logic.py
-bot/config.py
-```
-
-The bot reads secrets and runtime paths from `bot/.env`. The real `.env` file is
-not committed.
-
-Create it from the example:
+Create bot configuration
 
 ```bash
 cp bot/.env.example bot/.env
+nano bot/.env
 ```
 
-Required variables:
+Example
 
 ```env
 BOT_TOKEN=
+
 GAME_JSON=/opt/project/sniper541/site/sites/game/games.json
 BOOK_JSON=/opt/project/sniper541/site/sites/book/books.json
 ```
 
-Run the bot:
+Run installer
+
+```bash
+sudo ./scripts/install.sh
+```
+
+Installer automatically:
+
+- checks required software
+- installs nginx configuration
+- enables nginx site
+- tests nginx configuration
+- reloads nginx
+- installs systemd service
+- enables Telegram bot
+- starts Telegram bot
+
+---
+
+# Updating
+
+```bash
+cd /opt/project/sniper541
+
+git pull
+
+sudo ./scripts/update.sh
+```
+
+---
+
+# Uninstall
+
+```bash
+sudo ./scripts/uninstall.sh
+```
+
+Project files are not removed.
+
+---
+
+# Website
+
+Website files are located in
+
+```
+site/
+```
+
+nginx serves files directly from
+
+```
+/opt/project/sniper541/site
+```
+
+---
+
+# Telegram Bot
+
+Location
+
+```
+bot/
+```
+
+Start manually
 
 ```bash
 cd bot
-python bot.py
+
+python3 bot.py
 ```
 
-## nginx
+Production uses systemd.
 
-The nginx config is stored in:
+Configuration
 
-```text
+```
+bot/.env
+```
+
+Example
+
+```
+bot/.env.example
+```
+
+---
+
+# nginx
+
+Project configuration
+
+```
 nginx/sniper541.ru
 ```
 
-Production location:
+Installed as
 
-```text
+```
 /etc/nginx/sites-available/sniper541.ru
 ```
 
-After changing nginx config:
+through a symbolic link.
+
+---
+
+# systemd
+
+Service definition
+
+```
+systemd/mylife.service
+```
+
+Installed as
+
+```
+/etc/systemd/system/mylife.service
+```
+
+through a symbolic link.
+
+Useful commands
 
 ```bash
-sudo nginx -t
-sudo systemctl reload nginx
+systemctl status mylife
+
+systemctl restart mylife
+
+journalctl -u mylife -f
 ```
 
-## Secrets
+---
 
-Do not commit real tokens, passwords, logs, or cache files. They are ignored by
-`.gitignore`:
+# Secrets
 
-```text
+Never commit
+
+- .env
+- Telegram tokens
+- passwords
+- SSL certificates
+- logs
+
+---
+
+# .gitignore
+
+```
 .env
 *.log
-nohup.out
-__pycache__/
 *.pyc
+__pycache__/
 .idea/
+.vscode/
 ```
 
-## Deploy Notes
+---
 
-Recommended production layout:
+# Repository philosophy
 
-```text
-project/sniper541/site  -> /opt/project/sniper541/site
-project/sniper541/bot   -> /root/tgbot/mylife
-project/sniper541/nginx/sniper541.ru -> /etc/nginx/sites-available/sniper541.ru
+Everything that can be versioned is stored inside the repository.
+
+Server configuration only contains symbolic links.
+
+This allows deploying the whole project on a new server by cloning the
+repository and running
+
+```bash
+sudo ./scripts/install.sh
 ```
-
-The repository should contain the clean project files. Server-only secrets stay
-in `.env` files on the server.

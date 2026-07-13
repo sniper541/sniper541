@@ -8,10 +8,34 @@ def load_json(path):
     except Exception:
         return {"games": []} if "game" in path else {"books": []}
 
+def year_from_text(value):
+    parts = str(value or "").split()
+    for part in reversed(parts):
+        if part.isdigit() and len(part) == 4:
+            return part
+    return "Unknown"
+
+
+def build_statistics(data):
+    years = {}
+    if "games" in data:
+        for game in data.get("games", []):
+            year = year_from_text(game.get("date", ""))
+            years[year] = years.get(year, 0) + 1
+    elif "books" in data:
+        for book in data.get("books", []):
+            year = year_from_text(book.get("year", ""))
+            years[year] = years.get(year, 0) + 1
+
+    return {"years": dict(sorted(years.items(), reverse=True))}
+
+
 def save_json(path, data):
     if "games" in data:
+        data["statistics"] = build_statistics(data)
         data["total_count"] = len(data["games"])
     elif "books" in data:
+        data["statistics"] = build_statistics(data)
         data["total_count"] = len(data["books"])
 
     with open(path, "w", encoding="utf-8") as f:
