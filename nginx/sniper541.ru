@@ -1,5 +1,5 @@
 server {
-    server_name sniper541.ru www.sniper541.ru;
+    server_name sniper541.com www.sniper541.com;
 
     root /opt/project/sniper541/site;
     index owner.html;
@@ -42,7 +42,7 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
     }
 
-    location ~ ^/sites/(book|game|resume)/.*\.(css|js|png|jpg|jpeg|gif|ico|woff|woff2|ttf|svg|eot)$ {
+    location ~ ^/sites/(book|game|resume|projects)/.*\.(css|js|png|jpg|jpeg|gif|ico|woff|woff2|ttf|svg|eot)$ {
         root /opt/project/sniper541/site;
         try_files $uri =404;
     }
@@ -62,28 +62,36 @@ server {
         index index.html;
     }
 
+    location /projects {
+        alias /opt/project/sniper541/site/sites/projects;
+        index index.html;
+    }
+
     location /map {
         alias /opt/project/sniper541/site/sites/map;
         index index.html;
     }
 
     listen 443 ssl;
-    ssl_certificate /etc/letsencrypt/live/sniper541.ru/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/sniper541.ru/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/sniper541.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/sniper541.com/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
 }
 
 server {
-    if ($host = www.sniper541.ru) {
+    if ($host = www.sniper541.com) {
         return 301 https://$host$request_uri;
     }
 
-    if ($host = sniper541.ru) {
+    if ($host = sniper541.com) {
         return 301 https://$host$request_uri;
     }
 
     listen 80;
-    server_name sniper541.ru www.sniper541.ru;
+    server_name sniper541.com www.sniper541.com;
     return 404;
+
+
 }

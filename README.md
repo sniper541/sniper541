@@ -1,6 +1,6 @@
-﻿# sniper541
+# sniper541
 
-Personal website and Telegram bot for managing content on **sniper541.ru**.
+Personal website and Telegram bot for managing content on **sniper541.com**.
 
 The repository contains everything required for the project except secrets
 (Telegram token, SSL certificates, etc.).

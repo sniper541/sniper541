@@ -1,7 +1,22 @@
-﻿.env
+.env
 *.log
 nohup.out
 __pycache__/
 *.pyc
 .idea/
 .DS_Store
+# local secrets and runtime files
+.env.*
+!.env.example
+bot/.env
+bot/.env.*
+!bot/.env.example
+users.json
+site/json/users.json
+logs/
+log/
+backup/
+backups/
+*.bak
+*.tmp
+*~

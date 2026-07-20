@@ -1,222 +1,177 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mikhail Talyzin - Resume</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/sites/resume/style.css">
-
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
-
-
-<style>
-    [data-aos] {
-        opacity: 1 !important;
-        transform: none !important;
-    }
-</style>
-
+    <title>Михаил Талызин — DevOps Engineer</title>
+    <meta name="description" content="Резюме Михаила Талызина: DevOps, Linux, CI/CD, Docker, Kubernetes, мониторинг, автоматизация и production-системы.">
+    <link rel="stylesheet" href="/sites/resume/style.css?v=4">
 </head>
-<body class="dark-theme">
-    <!-- Переключатель языка -->
-    <div class="language-toggle">
-        <label class="switch">
-            <input type="checkbox" id="language-switch">
-            <span class="slider"></span>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/resume/">Mikhail Talyzin</a>
+        <nav class="topnav" aria-label="Навигация">
+            <a href="#experience" data-ru="Опыт" data-en="Experience">Опыт</a>
+            <a href="#skills" data-ru="Навыки" data-en="Skills">Навыки</a>
+            <a href="/projects/" data-ru="Проекты" data-en="Projects">Проекты</a>
+            <a href="resume.pdf">PDF</a>
+        </nav>
+        <label class="language-toggle" aria-label="Переключить язык">
+            <span>RU</span>
+            <input id="languageSwitch" type="checkbox">
+            <i></i>
+            <span>EN</span>
         </label>
-        <span class="language-label">EN/RU</span>
-    </div>
-    <div class="container">
-        <div class="top-row">
-            <aside class="loft-aside">
-                <header class="loft-header">
-                    <h1 class="loft-title" data-en="Mikhail Talyzin" data-ru="Талызин Михаил">Mikhail Talyzin</h1>
-                    <p id="age" class="loft-text" data-en="DevOps Engineer | <span class='dynamic-age'></span> Years Old | Born June 28, 1989" data-ru="DevOps-инженер | <span class='dynamic-age'></span> лет | Родился 28 июня 1989 года">DevOps Engineer | <span class="dynamic-age"></span> Years Old | Born June 28, 1989</p>
-                </header>
-                <div class="photo-frame">
-                    <img src="img/photo.jpg" alt="Mikhail Talyzin" class="profile-photo">
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow" data-ru="DevOps Engineer · Production Support" data-en="DevOps Engineer · Production Support">DevOps Engineer · Production Support</span>
+                <h1 data-ru="Михаил Талызин" data-en="Mikhail Talyzin">Михаил Талызин</h1>
+                <p class="lead" data-ru="DevOps-инженер с 10+ годами в IT, включая 4+ года в DevOps и сопровождении production-систем в банковском секторе и крупной распределённой инфраструктуре." data-en="DevOps engineer with 10+ years in IT, including 4+ years in DevOps and production support for banking systems and large distributed infrastructure.">DevOps-инженер с 10+ годами в IT, включая 4+ года в DevOps и сопровождении production-систем в банковском секторе и крупной распределённой инфраструктуре.</p>
+                <div class="hero-actions">
+                    <a class="btn primary" href="/projects/" data-ru="Смотреть проекты" data-en="View projects">Смотреть проекты</a>
+                    <a class="btn" href="resume.pdf" data-ru="Скачать PDF" data-en="Download PDF">Скачать PDF</a>
                 </div>
-                <div class="contact-info loft-section">
-                    <h2 class="loft-subtitle" data-en="Contact Information" data-ru="Контактная информация">Contact Information</h2>
-                    <p><img src="img/phone.png" alt="Phone" class="icon"> <a href="tel:+79237463336" class="contact-link">+7 (923) 746-3336</a></p>
-                    <p><img src="img/mail.png" alt="Email" class="icon"> <a href="mailto:sniper28.06@mail.ru" class="contact-link">sniper28.06@mail.ru</a></p>
-                    <p><img src="img/telegram.png" alt="Telegram" class="icon"> <a href="https://t.me/sniper541" class="contact-link">sniper541</a></p>
-                    <p><img src="img/github.png" alt="Github" class="icon"> <a href="https://github.com/sniper541" class="contact-link">sniper541</a></p>
+            </div>
+            <aside class="profile-card" aria-label="Контакты">
+                <img class="profile-photo" src="img/photo.jpg" alt="Михаил Талызин">
+                <div>
+                    <strong data-ru="Контакты" data-en="Contacts">Контакты</strong>
+                    <a href="tel:+79237463336">+7 (923) 746-3336</a>
+                    <a href="mailto:sniper28.06@mail.ru">sniper28.06@mail.ru</a>
+                    <a href="https://t.me/sniper541" target="_blank" rel="noreferrer">Telegram: sniper541</a>
+                    <a href="https://github.com/sniper541" target="_blank" rel="noreferrer">GitHub: sniper541</a>
                 </div>
             </aside>
-        </div>
-        <main class="loft-main">
-            <section id="about" class="loft-section" data-aos="fade-up"" data-aos="fade-up">
-                <h2 class="loft-subtitle" data-en="About Me" data-ru="О себе">About Me</h2>
-                <p class="loft-text" data-en="DevOps Engineer with 3+ years of experience in automation, CI/CD, and system administration (10+ years). Specialized in infrastructure optimization and integration in banking and pharma logistics." data-ru="DevOps-инженер с опытом более 3 лет в автоматизации, CI/CD и более 10 лет в системном администрировании. Специализация — оптимизация инфраструктуры и интеграции в банковской и фарм-логистике.">
-                    DevOps Engineer with 3+ years...
-                </p>
-            </section>
-            <section id="achievements" class="loft-section" data-aos="fade-up"" data-aos="fade-up">
-                <h2 class="loft-subtitle" data-en="Key Achievements" data-ru="Ключевые достижения">Key Achievements</h2>
-                <ul>
-                    <li data-en="Built full CI/CD pipeline for microservices from scratch." data-ru="Построил CI/CD пайплайн для микросервисов с нуля.">Built full CI/CD pipeline for microservices from scratch.</li>
-                    <li data-en="Developed internal tools for test data generation and service automation." data-ru="Разработал внутренние инструменты для генерации тестовых данных и автоматизации сервисов.">Developed internal tools...</li>
-                    <li data-en="Implemented monitoring and alerting for 50+ production services." data-ru="Настроил мониторинг и алертинг для 50+ продакшн-сервисов.">Implemented monitoring and alerting...</li>
-                </ul>
-            </section>
-            <section id="experience" class="loft-section" data-aos="fade-up" experience">
-                <h2 class="loft-subtitle" data-en="Work Experience" data-ru="Опыт работы">Work Experience</h2>
-                <div class="job">
-                    <h3 class="loft-job-title" data-en="Gazprombank - DevOps Engineer" data-ru="Газпромбанк - DevOps инженер">Gazprombank - DevOps Engineer</h3>
-                    <p class="loft-job-date">June 2023 - Present</p>
-                    <ul>
-                        <li data-en="Support and develop CI/CD pipelines (TeamCity, Bitbucket, Gradle)." data-ru="Поддержка и развитие CI/CD пайплайнов (TeamCity, Bitbucket, Gradle).">Support and develop CI/CD pipelines (TeamCity, Bitbucket, Gradle).</li>
-                        <li data-en="Deploy and maintain Java services in Docker containers on Linux." data-ru="Развёртывание и сопровождение Java-сервисов в Docker-контейнерах на Linux.">Deploy and maintain Java services in Docker containers on Linux.</li>
-                        <li data-en="Manage PostgreSQL databases and perform routine maintenance." data-ru="Сопровождение баз данных PostgreSQL и выполнение регламентных работ.">Manage PostgreSQL databases and perform routine maintenance.</li>
-                        <li data-en="Configure monitoring and alerting with Prometheus, Grafana, Zabbix, Kibana." data-ru="Настройка мониторинга и алертинга с использованием Prometheus, Grafana, Zabbix, Kibana.">Configure monitoring and alerting with Prometheus, Grafana, Zabbix, Kibana.</li>
-                        <li data-en="Extend service functionality in Python; develop API integrations." data-ru="Доработка функционала сервисов на Python, разработка API-интеграций.">Extend service functionality in Python; develop API integrations.</li>
-                        <li data-en="Set up and control API access to automate service interactions." data-ru="Настройка и контроль доступа к API для автоматизации взаимодействия между сервисами.">Set up and control API access to automate service interactions.</li>
-                        <li data-en="Create internal web interfaces (PHP/JS) for testers and support teams." data-ru="Разработка внутренних веб-интерфейсов (PHP/JS) для тестировщиков и служб поддержки.">Create internal web interfaces (PHP/JS) for testers and support teams.</li>
-                        <li data-en="Automate routine tasks using Bash and Python scripts." data-ru="Автоматизация рутинных задач с помощью скриптов Bash и Python.">Automate routine tasks using Bash and Python scripts.</li>
-                        <li data-en="Secure secrets and credentials via HashiCorp Vault." data-ru="Безопасное хранение секретов и учётных данных с помощью HashiCorp Vault.">Secure secrets and credentials via HashiCorp Vault.</li>
-                        <li data-en="Configure and maintain NGINX web servers and Nexus repositories." data-ru="Настройка и сопровождение веб-серверов NGINX и репозиториев Nexus.">Configure and maintain NGINX web servers and Nexus repositories.</li>
-                        <li data-en="Support credit infrastructure for corporate banking clients." data-ru="Поддержка инфраструктуры кредитного контура для корпоративных клиентов банка.">Support credit infrastructure for corporate banking clients.</li>
-                        <li data-en="Collaborate with developers, analysts, and QA teams." data-ru="Взаимодействие с разработчиками, аналитиками и командами QA.">Collaborate with developers, analysts, and QA teams.</li>
-                        <li data-en="Write technical documentation in Confluence (architecture, pipelines, processes)." data-ru="Ведение технической документации в Confluence (архитектура, пайплайны, процессы)."></li>
-                    </ul>
-                </div>
-                <div class="job">
-                    <h3 class="loft-job-title" data-en="Sber - Lead Engineer, IT Systems Support & Administration" data-ru="Сбер - Ведущий инженер, поддержка и администрирование ИТ-систем">Sber - Lead Engineer, IT Systems Support & Administration</h3>
-                    <p class="loft-job-date">October 2022 - May 2023 | Moscow, Russia | <a href="https://rabota.sber.ru/" class="loft-link" target="_blank">rabota.sber.ru</a></p>
-                    <ul>
-                        <li data-en="Support and administer complex integrated IT systems within Sber’s group, using ITSM practices." data-ru="Поддержка и администрирование сложных интегрированных ИТ-систем группы Сбера с использованием практик ITSM.">Support and administer complex integrated IT systems within Sber’s group, using ITSM practices.</li>
-                        <li data-en="Conduct acceptance testing (ATI) and perform scheduled tasks in production environments." data-ru="Проведение приемо-сдаточных испытаний (ПСИ) и выполнение регламентных задач в производственных средах.">Conduct acceptance testing (ATI) and perform scheduled tasks in production environments.</li>
-                        <li data-en="Implement deployments and resolve operational incidents efficiently." data-ru="Внедрение деплоев и оперативное устранение инцидентов в производственной среде.">Implement deployments and resolve operational incidents efficiently.</li>
-                        <li data-en="Provide methodological and consulting support to users." data-ru="Методологическая и консультационная поддержка пользователей.">Provide methodological and consulting support to users.</li>
-                    </ul>
-                </div>
-                <div class="job">
-                    <h3 class="loft-job-title" data-en="OOO Godovalov - System Administrator" data-ru="ООО Годовалов - Системный администратор">OOO Godovalov - System Administrator</h3>
-                    <p class="loft-job-date">April 2015 - July 2022 | 7 years 4 months</p>
-                    <ul>
-                        <li data-en="Install and configure network software on servers and workstations." data-ru="Установка и настройка сетевого ПО на серверах и рабочих станциях.">Install and configure network software on servers and workstations.</li>
-                        <li data-en="Ensure data backup and recovery processes." data-ru="Обеспечение процессов резервного копирования и восстановления данных.">Ensure data backup and recovery processes.</li>
-                        <li data-en="Monitor network performance and provide continuous support." data-ru="Мониторинг производительности сети и предоставление постоянной поддержки.">Monitor network performance and provide continuous support.</li>
-                    </ul>
-                </div>
-            </section>
-            <section id="education" class="loft-section" data-aos="fade-up" education">
-                <h2 class="loft-subtitle" data-en="Education" data-ru="Образование">Education</h2>
-                <p class="loft-text" data-en="Siberian State Geodesic Academy, Novosibirsk (2015) | B.Sc. in Information Systems Engineering" data-ru="Сибирская государственная геодезическая академия, Новосибирск (2015) | Инженер информационных систем">Siberian State Geodesic Academy, Novosibirsk (2015) | B.Sc. in Information Systems Engineering</p>
-                <p class="loft-text" data-en="NGPPK (2009) | Technician Programmer" data-ru="НГППК (2009) | Техник-программист">NGPPK (2009) | Technician Programmer</p>
-            </section>
-            <section id="skills" class="loft-section" data-aos="fade-up" skills">
-                <h2 class="loft-subtitle" data-en="Skills" data-ru="Навыки">Skills</h2>
-                <p class="loft-text">
-                    Proficient in: Linux, Docker, Docker Compose, Ansible, TeamCity, Jenkins, Grafana, Zabbix, Prometheus, Kibana, Vault, PostgreSQL, MySQL, MS SQL, Gradle, Git, Bash, PowerShell, Python, PHP, JavaScript, HTML, CSS, Nginx, Nexus, Postman, Windows Server, Camunda, VMware.
-                    Familiar with: Active Directory, DHCP, TCP/IP, RedHat, Ubuntu, Apache Ignite, Atlassian Jira, Atlassian Confluence, C, JIRA Service Desk, MikroTik, Jira administration.
-                </p>
-            </section>
-            <div style="text-align: center; margin-top: 1.5em;" data-aos="zoom-in">
-                <a href="resume.pdf" class="loft-link" style="font-size: 1.2em; padding: 0.6em 1.2em; background: #bb86fc; color: white; border-radius: 0.5em; text-decoration: none;">
-                    📄 Download PDF
-                </a>
+        </section>
+
+        <section class="quick-facts" aria-label="Коротко">
+            <article><span data-ru="Опыт в IT" data-en="IT experience">Опыт в IT</span><strong>10+ лет</strong></article>
+            <article><span data-ru="DevOps" data-en="DevOps">DevOps</span><strong>4+ года</strong></article>
+            <article><span data-ru="Фокус" data-en="Focus">Фокус</span><strong>CI/CD · Linux · Kubernetes</strong></article>
+            <article><span data-ru="Production" data-en="Production">Production</span><strong>Banking · Distributed systems</strong></article>
+        </section>
+
+        <section class="section about-section">
+            <div class="section-head">
+                <span class="eyebrow" data-ru="О себе" data-en="About">О себе</span>
+                <h2 data-ru="DevOps, эксплуатация и автоматизация production-систем" data-en="DevOps, operations and production automation">DevOps, эксплуатация и автоматизация production-систем</h2>
             </div>
-        </main>
-    </div>
+            <div class="about-grid">
+                <article class="about-card wide">
+                    <p data-ru="DevOps-инженер с опытом более 10 лет в IT, включая 4+ года в DevOps и сопровождении production-систем в банковском секторе и крупной распределённой инфраструктуре. Имею практический опыт эксплуатации высоконагруженных и критичных для бизнеса систем: deployment, troubleshooting, monitoring, hotfix/release-процессы, взаимодействие со смежными командами разработки и инфраструктуры." data-en="DevOps engineer with more than 10 years in IT, including 4+ years in DevOps and production support for banking systems and large distributed infrastructure. Practical experience with business-critical systems: deployment, troubleshooting, monitoring, hotfix/release processes and collaboration with development and infrastructure teams.">DevOps-инженер с опытом более 10 лет в IT, включая 4+ года в DevOps и сопровождении production-систем в банковском секторе и крупной распределённой инфраструктуре. Имею практический опыт эксплуатации высоконагруженных и критичных для бизнеса систем: deployment, troubleshooting, monitoring, hotfix/release-процессы, взаимодействие со смежными командами разработки и инфраструктуры.</p>
+                </article>
+                <article class="about-card">
+                    <h3 data-ru="Специализация" data-en="Specialization">Специализация</h3>
+                    <ul>
+                        <li data-ru="CI/CD и автоматизация процессов" data-en="CI/CD and process automation">CI/CD и автоматизация процессов</li>
+                        <li data-ru="Linux-инфраструктура и Java-сервисы" data-en="Linux infrastructure and Java services">Linux-инфраструктура и Java-сервисы</li>
+                        <li data-ru="Docker, Kubernetes и мониторинг production-сред" data-en="Docker, Kubernetes and production monitoring">Docker, Kubernetes и мониторинг production-сред</li>
+                        <li data-ru="Python/Bash автоматизация" data-en="Python/Bash automation">Python/Bash автоматизация</li>
+                        <li data-ru="PostgreSQL, Jenkins, TeamCity, Vault, NGINX" data-en="PostgreSQL, Jenkins, TeamCity, Vault, NGINX">PostgreSQL, Jenkins, TeamCity, Vault, NGINX</li>
+                    </ul>
+                </article>
+                <article class="about-card">
+                    <h3 data-ru="Ключевые достижения" data-en="Key achievements">Ключевые достижения</h3>
+                    <ul>
+                        <li data-ru="Настроил CI/CD для Java-сервисов в TeamCity с Docker и HashiCorp Vault." data-en="Built CI/CD for Java services in TeamCity with Docker and HashiCorp Vault.">Настроил CI/CD для Java-сервисов в TeamCity с Docker и HashiCorp Vault.</li>
+                        <li data-ru="Внедрил мониторинг и алертинг для 50+ сервисов: Prometheus, Grafana, Zabbix, Kibana." data-en="Implemented monitoring and alerting for 50+ services: Prometheus, Grafana, Zabbix, Kibana.">Внедрил мониторинг и алертинг для 50+ сервисов: Prometheus, Grafana, Zabbix, Kibana.</li>
+                        <li data-ru="Автоматизировал деплой, диагностику и сопровождение Python/Bash-скриптами." data-en="Automated deployment, diagnostics and support routines with Python/Bash scripts.">Автоматизировал деплой, диагностику и сопровождение Python/Bash-скриптами.</li>
+                        <li data-ru="Разработал внутренний PHP/JS UI для тестовых бизнес-процессов и интеграций Camunda/API." data-en="Built an internal PHP/JS UI for test business processes and Camunda/API integrations.">Разработал внутренний PHP/JS UI для тестовых бизнес-процессов и интеграций Camunda/API.</li>
+                        <li data-ru="Поддерживал распределённую инфраструктуру фарм-компании: 500+ филиалов, склады, кассы, удалённые точки." data-en="Supported distributed pharma infrastructure: 500+ branches, warehouses, POS equipment and remote sites.">Поддерживал распределённую инфраструктуру фарм-компании: 500+ филиалов, склады, кассы, удалённые точки.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="section-head">
+                <span class="eyebrow" data-ru="Стек" data-en="Stack">Стек</span>
+                <h2 data-ru="Навыки" data-en="Skills">Навыки</h2>
+            </div>
+            <div class="skills-grid">
+                <article><h3>Core</h3><p>Linux, Git, SQL, TCP/IP, Ubuntu, RedHat</p></article>
+                <article><h3>DevOps</h3><p>Docker, Kubernetes, Ansible, Jenkins, TeamCity, Nginx, Vault</p></article>
+                <article><h3>Monitoring</h3><p>Zabbix, Grafana, Prometheus, Kibana</p></article>
+                <article><h3>Databases</h3><p>PostgreSQL, MySQL, MS SQL, Apache Ignite</p></article>
+                <article><h3>Automation</h3><p>Python, Bash, PowerShell, JavaScript, C</p></article>
+                <article><h3>Tools</h3><p>Postman, Atlassian Jira, Atlassian Confluence, Camunda</p></article>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="section-head">
+                <span class="eyebrow" data-ru="Опыт" data-en="Experience">Опыт</span>
+                <h2 data-ru="Работа" data-en="Work experience">Работа</h2>
+            </div>
+            <div class="timeline">
+                <article class="job">
+                    <div class="job-meta"><strong>Газпромбанк</strong><span>Июнь 2023 — сейчас</span></div>
+                    <div class="job-body">
+                        <h3>DevOps Engineer</h3>
+                        <ul>
+                            <li>Поддержка и развитие CI/CD-пайплайнов для Java-сервисов.</li>
+                            <li>Развёртывание сервисов в Docker на Linux, работа с Nginx и Nexus.</li>
+                            <li>Настройка мониторинга и алертинга: Prometheus, Grafana, Zabbix, Kibana.</li>
+                            <li>Автоматизация задач на Bash/Python и создание внутренних web-интерфейсов.</li>
+                            <li>Работа с PostgreSQL, API-интеграциями, Vault и технической документацией.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="job">
+                    <div class="job-meta"><strong>Сбер</strong><span>Октябрь 2022 — май 2023</span></div>
+                    <div class="job-body">
+                        <h3>Ведущий инженер поддержки и администрирования ИТ-систем</h3>
+                        <ul>
+                            <li>Поддержка интегрированных ИТ-систем с использованием ITSM-практик.</li>
+                            <li>Проведение приёмочных испытаний, регламентных работ и внедрений.</li>
+                            <li>Оперативное устранение инцидентов и консультационная поддержка пользователей.</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="job">
+                    <div class="job-meta"><strong>ООО Годовалов</strong><span>Апрель 2015 — июль 2022</span></div>
+                    <div class="job-body">
+                        <h3>Системный администратор</h3>
+                        <ul>
+                            <li>Администрирование серверов, рабочих станций и сетевого ПО.</li>
+                            <li>Резервное копирование, восстановление данных и поддержка пользователей.</li>
+                            <li>Мониторинг производительности сети и обеспечение стабильной работы инфраструктуры.</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section split">
+            <div>
+                <span class="eyebrow" data-ru="Образование" data-en="Education">Образование</span>
+                <h2 data-ru="База" data-en="Education">База</h2>
+            </div>
+            <div class="edu-list">
+                <p><strong>Сибирская государственная геодезическая академия</strong><br>Инженер информационных систем, 2015</p>
+                <p><strong>НГППК</strong><br>Техник-программист, 2009</p>
+            </div>
+        </section>
+    </main>
 
     <script>
-        // Функция для расчета актуального возраста
-        function calculateAge(birthDate) {
-            const birth = new Date(birthDate);
-            const today = new Date();
-            let age = today.getFullYear() - birth.getFullYear();
-            const monthDiff = today.getMonth() - birth.getMonth();
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-                age--;
-            }
-            return age;
+        const languageSwitch = document.querySelector('#languageSwitch');
+        const translated = document.querySelectorAll('[data-ru][data-en]');
+
+        function setLanguage(lang) {
+            translated.forEach((node) => {
+                node.innerHTML = node.dataset[lang] || node.innerHTML;
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('resumeLanguage', lang);
+            languageSwitch.checked = lang === 'en';
         }
 
-        // Устанавливаем актуальный возраст на основе даты рождения (June 28, 1989)
-        document.addEventListener('DOMContentLoaded', () => {
-            const birthDate = '1989-06-28';
-            const ageElement = document.querySelector('.dynamic-age');
-            if (ageElement) {
-                const age = calculateAge(birthDate);
-                ageElement.textContent = age; // Устанавливаем актуальный возраст (на 03.03.2025 будет 35)
-            }
-
-            // Плавная прокрутка для навигации
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Отслеживание активной секции
-            const sections = document.querySelectorAll('section[id]');
-            const navItems = document.querySelectorAll('.nav-link');
-
-            function updateActiveNav() {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    const sectionHeight = section.clientHeight;
-                    if (window.pageYOffset >= (sectionTop - 200)) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                    if (item.getAttribute('href') === `#${current}`) {
-                        item.classList.add('active');
-                    }
-                });
-            }
-
-            window.addEventListener('scroll', updateActiveNav);
-            updateActiveNav(); // Инициализация
-
-            // Переключение языка
-            const languageSwitch = document.getElementById('language-switch');
-            const elements = document.querySelectorAll('[data-en], [data-ru]');
-
-            function toggleLanguage() {
-                const isRussian = languageSwitch.checked;
-                elements.forEach(element => {
-                    const enText = element.getAttribute('data-en');
-                    const ruText = element.getAttribute('data-ru');
-                    console.log('Переключаем язык:', { isRussian, enText, ruText }); // Логирование для отладки
-                    // Обрабатываем текст для элемента с возрастом, сохраняя span для dynamic-age
-                    if (element.id === 'age') {
-                        const age = document.querySelector('.dynamic-age').textContent;
-                        const enMatch = enText.match(/<span class='dynamic-age'><\/span>/);
-                        const ruMatch = ruText.match(/<span class='dynamic-age'><\/span>/);
-                        if (enMatch && ruMatch) {
-                            element.innerHTML = isRussian ? 
-                                ruText.replace('<span class=\'dynamic-age\'></span>', `<span class='dynamic-age'>${age}</span>`) :
-                                enText.replace('<span class=\'dynamic-age\'></span>', `<span class='dynamic-age'>${age}</span>`);
-                        }
-                    } else {
-                        element.textContent = isRussian ? ruText : enText;
-                    }
-                });
-                document.documentElement.lang = isRussian ? 'ru' : 'en';
-            }
-
-            languageSwitch.addEventListener('change', toggleLanguage);
-            toggleLanguage(); // Устанавливаем начальный язык (английский)
-        });
+        languageSwitch.addEventListener('change', () => setLanguage(languageSwitch.checked ? 'en' : 'ru'));
+        setLanguage(localStorage.getItem('resumeLanguage') || 'ru');
     </script>
 </body>
 </html>

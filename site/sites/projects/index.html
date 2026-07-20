@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проекты — Михаил Талызин</title>
+    <meta name="description" content="Портфолио проектов Михаила Талызина: web-панель, сайты, Telegram-боты и инфраструктурные инструменты.">
+    <link rel="stylesheet" href="/sites/projects/style.css?v=6">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="/resume/">Mikhail Talyzin</a>
+        <nav>
+            <a class="back-link" href="/resume/" data-ru="← Назад" data-en="← Back">← Назад</a>
+            <a href="/resume/" data-ru="Резюме" data-en="Resume">Резюме</a>
+            <a href="https://github.com/sniper541" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+        <label class="language-toggle" aria-label="Переключить язык">
+            <span>RU</span>
+            <input id="languageSwitch" type="checkbox">
+            <i></i>
+            <span>EN</span>
+        </label>
+    </header>
+
+    <main>
+        <section class="hero compact-hero">
+            <div>
+                <span class="eyebrow">Portfolio</span>
+                <h1 data-ru="Проекты и web-инструменты" data-en="Projects and web tools">Проекты и web-инструменты</h1>
+            </div>
+            <p data-ru="Ниже — несколько проектов для портфолио: приватная DevOps-панель, публичный сайт гостевых домиков и web-инструменты для управления данными." data-en="A small portfolio collection: a private DevOps panel, a public guest house website and web tools for data management.">Ниже — несколько проектов для портфолио: приватная DevOps-панель, публичный сайт гостевых домиков и web-инструменты для управления данными.</p>
+        </section>
+
+        <section class="project-grid" aria-label="Список проектов">
+            <article class="project-card featured">
+                <a class="screenshot-link" href="img/scripts-panel.png" target="_blank" rel="noreferrer" aria-label="Открыть полный скриншот scripts.sniper541.ru"><img src="img/scripts-panel.png?v=6" alt="Административная панель scripts.sniper541.ru" loading="eager" decoding="async" fetchpriority="high"><span>Открыть полный скрин</span></a>
+                <div>
+                    <span class="tag">Private DevOps panel</span>
+                    <h2>scripts.sniper541.ru</h2>
+                    <p data-ru="Приватная web-панель для управления проектами, git-операциями, systemd-сервисами, nginx/php-fpm и web-меню Telegram-ботов." data-en="Private web panel for managing projects, git operations, systemd services, nginx/php-fpm and Telegram bot web menus.">Приватная web-панель для управления проектами, git-операциями, systemd-сервисами, nginx/php-fpm и web-меню Telegram-ботов.</p>
+                    <ul>
+                        <li>PHP + JavaScript</li>
+                        <li>systemd, nginx, git</li>
+                        <li>CSRF, whitelist actions</li>
+                    </ul>
+                    <div class="project-actions"><a class="btn" href="img/scripts-panel.png" target="_blank" rel="noreferrer" data-ru="Открыть полный скрин" data-en="Open full screenshot">Открыть полный скрин</a><a class="btn disabled" aria-disabled="true" data-ru="Код приватный" data-en="Private code">Код приватный</a></div>
+                </div>
+            </article>
+
+            <article class="project-card">
+                <img src="img/dacha-home.jpg" alt="Сайт Любимая дача" loading="lazy" decoding="async">
+                <div>
+                    <span class="tag">Public website</span>
+                    <h2 data-ru="Любимая дача" data-en="Lyubimaya Dacha">Любимая дача</h2>
+                    <p data-ru="Адаптивный сайт гостевых домиков: первый экран, галереи, светлая/тёмная тема, карточки услуг, отзывы и переход к бронированию." data-en="Responsive guest house website: hero section, galleries, light/dark theme, service cards, reviews and WhatsApp booking link.">Адаптивный сайт гостевых домиков: первый экран, галереи, светлая/тёмная тема, карточки услуг, отзывы и переход к бронированию.</p>
+                    <ul>
+                        <li>HTML/CSS/JavaScript</li>
+                        <li>Swiper galleries</li>
+                        <li>Nginx + HTTPS</li>
+                    </ul>
+                    <a class="btn" href="https://dacha.sniper541.ru/" target="_blank" rel="noreferrer" data-ru="Открыть сайт" data-en="Open website">Открыть сайт</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <script>
+        const languageSwitch = document.querySelector('#languageSwitch');
+        const translated = document.querySelectorAll('[data-ru][data-en]');
+
+        function setLanguage(lang) {
+            translated.forEach((node) => {
+                node.innerHTML = node.dataset[lang] || node.innerHTML;
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('resumeLanguage', lang);
+            languageSwitch.checked = lang === 'en';
+        }
+
+        languageSwitch.addEventListener('change', () => setLanguage(languageSwitch.checked ? 'en' : 'ru'));
+        setLanguage(localStorage.getItem('resumeLanguage') || 'ru');
+    </script>
+</body>
+</html>
